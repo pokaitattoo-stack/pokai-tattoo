@@ -44,7 +44,8 @@ export const translations = {
     consentLabel: 'I understand that submitting this form does not confirm an appointment.',
     bookingSubmit: 'SEND INQUIRY',
     bookingSending: 'SENDING...',
-    bookingSuccess: 'Thank you. Your inquiry has been sent successfully.',
+    bookingSuccess:
+      "Thank you! Your inquiry has been sent successfully. I'll get back to you as soon as possible.",
     bookingError: 'Something went wrong. Please try again or contact me by email.',
     errorRequired: 'This field is required.',
     errorEmailInvalid: 'Please enter a valid email address.',
@@ -91,7 +92,7 @@ export const translations = {
     consentLabel: '我了解送出表單不代表預約已成立。',
     bookingSubmit: '送出諮詢',
     bookingSending: '傳送中...',
-    bookingSuccess: '謝謝你，你的諮詢資料已成功送出。',
+    bookingSuccess: '謝謝你！你的諮詢資料已成功送出，我會盡快與你聯繫。',
     bookingError: '資料傳送失敗，請稍後再試，或直接透過 Email 聯絡。',
     errorRequired: '此欄位為必填。',
     errorEmailInvalid: '請輸入正確的電子信箱格式。',

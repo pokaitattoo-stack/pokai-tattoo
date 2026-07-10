@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useReveal } from '../hooks/useReveal'
 import { useLanguage } from '../context/LanguageContext'
+import { trackEvent } from '../utils/analytics'
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const MAX_FILES = 5
@@ -55,12 +56,39 @@ function BookSession() {
   const [serverError, setServerError] = useState('')
 
   const messageRef = useRef(null)
+  const sectionRef = useRef(null)
+  const viewFiredRef = useRef(false)
+  const formStartFiredRef = useRef(false)
 
   useEffect(() => {
     if ((submitStatus === 'success' || submitStatus === 'error') && messageRef.current) {
       messageRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
     }
   }, [submitStatus])
+
+  useEffect(() => {
+    const node = sectionRef.current
+    if (!node) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !viewFiredRef.current) {
+          viewFiredRef.current = true
+          trackEvent('booking_view')
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.5 },
+    )
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [])
+
+  const handleFormStart = () => {
+    if (formStartFiredRef.current) return
+    formStartFiredRef.current = true
+    trackEvent('form_start')
+  }
 
   const inputClass = (hasError) =>
     `w-full border bg-transparent px-4 py-3 font-body text-sm text-white placeholder:text-neutral-600 transition-colors duration-300 focus:outline-none ${
@@ -133,6 +161,7 @@ function BookSession() {
         setForm(initialForm)
         setFiles([])
         formEl.reset()
+        trackEvent('booking_submit')
       } else {
         let message = ''
         try {
@@ -159,6 +188,7 @@ function BookSession() {
   return (
     <section
       id="booking"
+      ref={sectionRef}
       className="bg-black px-6 pb-10 pt-32 md:px-16 md:pb-10 md:pt-44"
     >
       <div
@@ -180,6 +210,7 @@ function BookSession() {
         <form
           noValidate
           onSubmit={handleSubmit}
+          onFocus={handleFormStart}
           className="mx-auto w-full text-left md:mx-0 md:max-w-[620px]"
         >
           <input type="hidden" name="_subject" value="New Tattoo Inquiry — POKAI Tattoo" />
@@ -399,7 +430,7 @@ function BookSession() {
                 ref={messageRef}
                 role="status"
                 aria-live="polite"
-                className="font-body text-sm text-neutral-300"
+                className="font-body border border-white/30 bg-white/[0.03] px-6 py-5 text-sm leading-relaxed text-white"
               >
                 {t.bookingSuccess}
               </p>
