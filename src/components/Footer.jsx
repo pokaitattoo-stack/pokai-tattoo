@@ -7,7 +7,10 @@ function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="bg-black px-6 pb-32 pt-8 md:px-16 md:pb-44 md:pt-8">
+    <footer
+  id="contact"
+  className="bg-black px-6 pb-32 pt-8 md:px-16 md:pb-44 md:pt-8"
+>
       <div
         ref={ref}
         className={`mx-auto flex max-w-7xl flex-col items-center gap-6 text-center transition-all duration-[1100ms] ease-out ${
