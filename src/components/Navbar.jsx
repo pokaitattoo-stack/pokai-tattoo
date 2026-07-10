@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useLanguage } from '../context/LanguageContext'
 
-const NAV_KEYS = ['work', 'about', 'booking', 'contact']
+const NAV_ITEMS = [
+  { key: 'work', target: 'work' },
+  { key: 'about', target: 'about' },
+  { key: 'booking', target: 'booking' },
+  { key: 'contact', target: 'contact' },
+]
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -24,15 +29,20 @@ function Navbar() {
         <span className="font-display text-base tracking-[0.35em] text-white">POKAI</span>
 
         <nav className="flex items-center gap-6 text-[10px] tracking-[0.22em] text-neutral-300 sm:gap-9 md:text-xs md:tracking-[0.25em]">
-          {NAV_KEYS.map((key) => (
-            <button
-              key={key}
-              type="button"
-              className="font-body transition-colors duration-300 hover:text-white"
-            >
-              {t[key]}
-            </button>
-          ))}
+          {NAV_ITEMS.map((item) => (
+  <button
+    key={item.key}
+    type="button"
+    onClick={() => {
+      document.getElementById(item.target)?.scrollIntoView({
+        behavior: 'smooth',
+      })
+    }}
+    className="font-body transition-colors duration-300 hover:text-white"
+  >
+    {t[item.key]}
+  </button>
+))}
 
           <span className="flex items-center gap-1.5 font-body">
             <button
