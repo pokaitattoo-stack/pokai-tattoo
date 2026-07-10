@@ -162,6 +162,7 @@ function BookSession() {
         setFiles([])
         formEl.reset()
         trackEvent('booking_submit')
+        console.log('META_LEAD_FIRED')
         trackPixelEvent('Lead')
       } else {
         let message = ''
