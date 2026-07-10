@@ -39,7 +39,7 @@ function SelectedWorks() {
   const { t } = useLanguage()
 
   return (
-    <section className="bg-black px-6 py-28 md:px-16 md:py-40">
+    <section id="work" className="bg-black px-6 py-28 md:px-16 md:py-40">
       <div className="mx-auto max-w-7xl">
         <div
           ref={headingRef}
