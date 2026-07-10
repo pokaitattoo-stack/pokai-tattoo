@@ -53,13 +53,19 @@ function Hero() {
           <span className="h-px w-6 bg-neutral-500" />
         </div>
 
-        <button
-          type="button"
-          className="animate-fade-in-up font-body mt-14 border border-white/70 px-10 py-4 text-[11px] tracking-[0.3em] text-white transition-colors duration-500 hover:bg-white hover:text-black"
-          style={{ animationDelay: '1.15s' }}
-        >
-          {t.bookConsultation}
-        </button>
+       <button
+  type="button"
+  onClick={() =>
+    document.getElementById('booking')?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    })
+  }
+  className="animate-fade-in-up font-body mt-14 border border-white/70 px-10 py-4 text-[11px] tracking-[0.3em] text-white transition-colors duration-500 hover:bg-white hover:text-black"
+  style={{ animationDelay: '1.15s' }}
+>
+  {t.bookConsultation}
+</button>
       </div>
 
       <div
