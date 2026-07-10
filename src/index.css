@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+:root {
+  --font-display: 'Cormorant', 'Noto Sans TC', serif;
+  --font-body: 'Noto Sans TC', system-ui, sans-serif;
+}
+
+html {
+  background: #000;
+}
+
+body {
+  margin: 0;
+  background: #000;
+  overscroll-behavior: none;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scroll-line {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  45% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  55% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}
+
+.animate-fade-in-up {
+  opacity: 0;
+  animation: fade-in-up 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in {
+  opacity: 0;
+  animation: fade-in 1.8s ease-out forwards;
+}
+
+.animate-scroll-line {
+  animation: scroll-line 2.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up,
+  .animate-fade-in {
+    animation-duration: 0.01ms !important;
+    opacity: 1;
+  }
+  .animate-scroll-line {
+    animation: none !important;
+  }
+}
