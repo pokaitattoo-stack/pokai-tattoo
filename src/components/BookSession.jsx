@@ -137,12 +137,16 @@ function BookSession() {
   }
 
   const handleSubmit = async (e) => {
+    console.log('DEBUG: submit started')
     e.preventDefault()
     const formEl = e.currentTarget
 
     const nextErrors = validate()
     setErrors(nextErrors)
-    if (Object.keys(nextErrors).length > 0) return
+    if (Object.keys(nextErrors).length > 0) {
+      console.log('DEBUG: validation failed, aborting submit', nextErrors)
+      return
+    }
 
     setIsSubmitting(true)
     setSubmitStatus('idle')
@@ -150,18 +154,26 @@ function BookSession() {
 
     try {
       const formData = new FormData(formEl)
+      console.log('DEBUG: before fetch/Formspree request')
       const response = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
         body: formData,
         headers: { Accept: 'application/json' },
       })
+      console.log('DEBUG: after fetch')
+      console.log('DEBUG: response status', response.status)
+      console.log('DEBUG: response.ok', response.ok)
 
       if (response.ok) {
+        console.log('DEBUG: before setSubmitStatus(success)')
         setSubmitStatus('success')
+        console.log('DEBUG: after setSubmitStatus(success)')
         setForm(initialForm)
         setFiles([])
         formEl.reset()
+        console.log('DEBUG: before trackEvent(booking_submit)')
         trackEvent('booking_submit')
+        console.log('DEBUG: before trackPixelEvent(Lead)')
         console.log('META_LEAD_FIRED')
         trackPixelEvent('Lead')
       } else {
@@ -179,10 +191,12 @@ function BookSession() {
         setServerError(message)
         setSubmitStatus('error')
       }
-    } catch {
+    } catch (err) {
+      console.log('DEBUG: caught error in try/catch', err)
       setServerError('')
       setSubmitStatus('error')
     } finally {
+      console.log('DEBUG: submit finished')
       setIsSubmitting(false)
     }
   }
