@@ -21,7 +21,7 @@ function About() {
   const { t } = useLanguage()
 
   return (
-    <section className="bg-black px-6 py-28 md:px-16 md:py-40">
+    <section id="about" className="bg-black px-6 py-28 md:px-16 md:py-40">
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-14 md:grid-cols-2 md:gap-20">
         <div
           ref={imgRef}
