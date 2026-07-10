@@ -34,7 +34,7 @@ function Footer() {
             Instagram
           </a>
           <a
-            href="mailto:your@email.com"
+            href="mailto:pokai.tattoo@gmail.com"
             aria-label="Email POKAI TATTOO"
             className="font-body transition-colors duration-300 hover:text-white"
           >
