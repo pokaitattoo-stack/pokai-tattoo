@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useReveal } from '../hooks/useReveal'
 import { useLanguage } from '../context/LanguageContext'
-import { trackEvent } from '../utils/analytics'
+import { trackEvent, trackPixelEvent } from '../utils/analytics'
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const MAX_FILES = 5
@@ -162,6 +162,7 @@ function BookSession() {
         setFiles([])
         formEl.reset()
         trackEvent('booking_submit')
+        trackPixelEvent('Lead')
       } else {
         let message = ''
         try {
