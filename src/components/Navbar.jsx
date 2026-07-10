@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useLanguage } from '../context/LanguageContext'
+import { scrollToId } from '../utils/scroll'
 
 const NAV_ITEMS = [
   { key: 'work', target: 'work' },
@@ -30,19 +31,15 @@ function Navbar() {
 
         <nav className="flex items-center gap-6 text-[10px] tracking-[0.22em] text-neutral-300 sm:gap-9 md:text-xs md:tracking-[0.25em]">
           {NAV_ITEMS.map((item) => (
-  <button
-    key={item.key}
-    type="button"
-    onClick={() => {
-      document.getElementById(item.target)?.scrollIntoView({
-        behavior: 'smooth',
-      })
-    }}
-    className="font-body transition-colors duration-300 hover:text-white"
-  >
-    {t[item.key]}
-  </button>
-))}
+            <button
+              key={item.key}
+              type="button"
+              onClick={() => scrollToId(item.target)}
+              className="font-body transition-colors duration-300 hover:text-white"
+            >
+              {t[item.key]}
+            </button>
+          ))}
 
           <span className="flex items-center gap-1.5 font-body">
             <button

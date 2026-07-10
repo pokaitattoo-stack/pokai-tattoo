@@ -1,5 +1,6 @@
 import { useReveal } from '../hooks/useReveal'
 import { useLanguage } from '../context/LanguageContext'
+import { scrollToId } from '../utils/scroll'
 
 function ExperienceItem({ text, index, visible }) {
   return (
@@ -19,6 +20,11 @@ function About() {
   const [textRef, textVisible] = useReveal()
   const [listRef, listVisible] = useReveal()
   const { t } = useLanguage()
+
+  const handleCtaClick = (e) => {
+    e.preventDefault()
+    scrollToId('booking')
+  }
 
   return (
     <section id="about" className="bg-black px-6 py-28 md:px-16 md:py-40">
@@ -86,6 +92,7 @@ function About() {
 
           <a
             href="#booking"
+            onClick={handleCtaClick}
             className="font-body mt-12 inline-block border border-white/70 px-10 py-4 text-[11px] tracking-[0.3em] text-white transition-colors duration-500 hover:bg-white hover:text-black"
           >
             {t.aboutCta}
